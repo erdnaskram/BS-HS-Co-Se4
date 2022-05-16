@@ -1,0 +1,29 @@
+
+class heimFahrService() {
+
+    sem platzfrei = 0
+    sem eingestiegen = 0
+    sem angekommen = 0
+    sem ausgestiegen = 0
+
+    void discobesucher() {
+        ankommen_abfahrtstelle_h()
+        wait(platzfrei)
+        einsteigen_h()
+        signal(eingestiegen)
+        wait(angekommen)
+        ausgestiegen_h()
+        signal(ausgestiegen)
+    }
+
+    void motorad() {
+        while(true) {
+            fahrt_zur_abfahrtstelle_h()
+            signal(platzfrei)
+            wait(eingestiegen)
+            fahrt_zum_ziel()
+            signal(angekommen)
+            wait(ausgestiegen)
+        }
+    }
+}

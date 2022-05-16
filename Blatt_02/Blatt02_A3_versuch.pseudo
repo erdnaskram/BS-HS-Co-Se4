@@ -1,0 +1,26 @@
+
+class heimFahrService() {
+
+    sem voll = 0
+    sem leer = N
+    sem mutex
+
+    void discobesucher() {
+        wait(leer)
+        wait(mutex)
+        addBesucher()
+        signal(mutex)
+        signal(voll)
+    }
+
+    void motorad() {
+        while(true) {
+            wait(voll)
+            wait(mutex)
+            besucher = remove_besucher()
+            signal(mutex)
+            signal(leer)
+            heimfahren(besucher)
+        }
+    }
+}
