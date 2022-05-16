@@ -1,0 +1,32 @@
+//! ACHTUNG
+//! nicht fertig
+
+class autoHeimFahrService() {
+
+    sem platzfrei = 0
+    sem eingestiegen = 0
+    sem angekommen = 0
+    sem ausgestiegen = 0
+
+    void discoBesucherGruppe(int n) {
+        //* n = Anzahl Personen
+        ankommen_abfahrtstelle_h()
+        wait(platzfrei, n)
+        einsteigen_h()
+        signal(eingestiegen, n)
+        wait(angekommen)
+        // ausgestiegen_h()
+        // signal(ausgestiegen)
+    }
+
+    void pkw() {
+        // while(true) {
+        //     fahrt_zur_abfahrtstelle_h()
+        //     signal(platzfrei)
+        //     wait(eingestiegen)
+        //     fahrt_zum_ziel()
+        //     signal(angekommen)
+        //     wait(ausgestiegen)
+        // }
+    }
+}

@@ -1,12 +1,12 @@
 
-class heimFahrService() {
+class motoradHeimFahrService() {
 
     sem platzfrei = 0
     sem eingestiegen = 0
     sem angekommen = 0
     sem ausgestiegen = 0
 
-    void discobesucher() {
+    void discoBesucher() {
         ankommen_abfahrtstelle_h()
         wait(platzfrei)
         einsteigen_h()

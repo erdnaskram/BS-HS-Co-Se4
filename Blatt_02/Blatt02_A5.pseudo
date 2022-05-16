@@ -1,0 +1,43 @@
+
+
+class ungeduldigeKunden() {
+
+    int warteplaetze = 4
+    sem mutex = 1
+    sem warteplatz_leer = 4
+    sem warteplatz_voll = 0
+    sem friseurstuhl = 0
+    sem kundeistda = 0
+    sem haaregeschnitten = 0
+
+    void kunde() {
+        kommt_rein_h()
+        wait(mutex)
+        if(warteplatz_leer == 0){
+            gehen_h()
+            signal(mutex)
+        } else {
+            warteplaetze --
+            signal(mutex)
+            hinsetzen_warteplatz_h()
+            wait(friseurstuhl)
+            wait(mutex)
+            warteplaetze ++
+            signal(mutex)
+            hinsetzen_friseurstuhl_h()
+            signal(kundeistda)
+            wait(haaregeschnitten)
+            signal(friseurstuhl)
+            gehen_h()
+        }
+    }
+
+    void friseur() {
+        while(true) {
+            signal(friseurstuhl)
+            wait(kundeistda)
+            haaregeschnitten_h()
+            signal(haaregeschnitten)
+        }
+    }
+}
